@@ -1,2 +1,2 @@
-import sample from './sample.js';
-sample();
+import grayscale from './grayscale.js'
+grayscale();

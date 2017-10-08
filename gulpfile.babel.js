@@ -45,25 +45,52 @@ gulp.task('styles', () => {
   gulp.src(`src/styles/**/*.less`)
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
-    .pipe($.less())
+    .pipe($.less({
+      paths: [
+        './node_modules/font-awesome/less',
+        './node_modules/bootstrap-less/',
+        './src/styles'
+      ]
+    }))
     .pipe($.cssmin())
     .pipe($.autoprefixer())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('assets'))
 });
 
+/** cssを圧縮します */
 gulp.task('cssmin', () => {
   gulp.src('assets/*.css')
   .pipe($.cssmin())
   .pipe($.rename({suffix: '.min'}))
-  .pipe(gulp.dest('assets/'));
+  .pipe(gulp.dest('assets/min/'));
 });
 
-gulp.task('build', ['scripts', 'styles', 'cssmin']);
+/** カスタムfontをを生成します */
+gulp.task('subset', cb => {
+  const texts = []
+  // まずCSSを処理してcontentプロパティの値を集めます
+  gulp.src(['./assets/**.css'])
+    .pipe($.css2txt())
+    .on('data', file => texts.push(file.contents.toString()))
+    .on('end', () => {
+
+      const text =  texts.join('')
+      const formats = ['eot', 'ttf', 'woff', 'svg']
+
+      // cssからの文字の抽出が終わったら、これをフォントファイルに適用します
+      gulp.src(['./node_modules/font-awesome/fonts/fontawesome-webfont.ttf'])
+        .pipe($.fontmin({ text, formats }))
+        .pipe(gulp.dest('./fonts'))
+        .on('end', () => cb())
+    })
+});
+
+gulp.task('build', ['scripts', 'styles', 'cssmin', 'subset']);
 
 gulp.task('watch', () => {
   bundle(true);
-  gulp.watch('src/styles/**/*.less', ['styles', 'cssmin']);
+  gulp.watch('src/styles/**/*.less', ['styles', 'cssmin', 'subset']);
 });
 
 gulp.task('server', ['watch'], () => {

@@ -1,5 +1,9 @@
-@import "variables.less";
+@import "font-awesome.less";
+@import "bootstrap/bootstrap";
 @import "mixins.less";
+@import "variables.less";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+@import url(http://fonts.googleapis.com/css?family=Megrim);
 
 body {
     width: 100%;
@@ -22,7 +26,8 @@ h5,
 h6 {
     margin: 0 0 35px;
     text-transform: uppercase;
-    font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+    /*font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    font-family: 'Open Sans Condensed', Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
 }
@@ -139,6 +144,7 @@ a {
         display: table-cell;
         vertical-align: middle;
         .brand-heading {
+            font-family: 'Megrim', cursive;
             font-size: 40px;
         }
         .intro-text {
