@@ -128,6 +128,9 @@ a {
 }
 
 .intro {
+    position: fixed;
+    top: 0px;
+    z-index: -1;
     display: table;
     width: 100%;
     height: auto;
@@ -238,10 +241,17 @@ a {
     }
 }
 
+#about {
+    margin-top: 790px;
+    padding-top: 0px;
+}
+
 .about-section {
+    padding-top: 200px;
+    padding-bottom: 200px;
     display: table;
     width: 100%;
-    height: auto;
+    height: 100%;
     text-align: center;
     color: @font_color;
     background: url(../img/about-bg.gif) no-repeat bottom center scroll;
@@ -263,7 +273,6 @@ a {
     }
     @media(min-width:768px) {
         height: 100%;
-        padding: 0;
         .intro-body {
             .brand-heading {
                 font-size: 100px;
@@ -273,6 +282,30 @@ a {
             }
         }
     }
+}
+
+#tracklist {
+    width: 100%;
+    background-color: @bg_color;
+}
+
+#demo {
+    width: 100%;
+    background-color: @bg_color;
+}
+
+#shop {
+    width: 100%;
+    background-color: @bg_color;
+}
+
+#staff {
+    width: 100%;
+    background-color: @bg_color;
+}
+
+footer {
+    background-color: @bg_color;
 }
 
 .content-section {
