@@ -143,6 +143,10 @@ a {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+    h1 {
+        color: @intro_fg;
+        background-color: @intro_bg;
+    }
     .intro-body {
         display: table-cell;
         vertical-align: middle;
@@ -152,6 +156,8 @@ a {
         }
         .intro-text {
             font-size: 18px;
+            color: @intro_fg;
+            background-color: @intro_bg;
         }
     }
     @media(min-width:768px) {
